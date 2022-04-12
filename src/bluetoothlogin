@@ -1,0 +1,8 @@
+#!/bin/bash
+# usage: bluetoothlogin add bt-address username / bluetoothlogin verify username / bluetoothlogin init
+# inspired by LethalEthan's Bluetooth-Unlock
+set -e
+
+[ "$1" == "init" ] && mkdir -p /var/lib/bluetoothlogin-keys
+[ "$1" == "create" ] && echo  $2 > /var/lib/bluetoothlogin-keys/$3
+[ "$1" == "verify" ] && l2ping $(cat /var/lib/bluetoothlogin-keys/$2) -t 1 -c 1
